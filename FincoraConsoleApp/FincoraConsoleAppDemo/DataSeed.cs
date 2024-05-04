@@ -49,22 +49,22 @@ namespace FincoraConsoleAppDemo
 
             context.Clients.AddRangeAsync
             (
-                new Client() { Name = "Filip", Surname = "Barovsky",Degree = "Mgr",
+                new Client() { Name = "Filip", Surname = "Barovsky",
                                 Nationality = "Slovak", PhoneNumber = "44452456", AddressID = addresses[6].Id },
 
-                new Client() { Name = "Jaroslav", Surname = "Novotný",Degree = "Ing",
+                new Client() { Name = "Jaroslav", Surname = "Novotný",
                                 Nationality = "Czech", PhoneNumber = "759994", AddressID = addresses[5].Id },
 
-                new Client() { Name = "Patrik", Surname = "Landovsky",Degree = "Bc",
+                new Client() { Name = "Patrik", Surname = "Landovsky",
                                 Nationality = "Slovak", PhoneNumber = "778847", AddressID = addresses[9].Id },
 
-                new Client() { Name = "Stanislav", Surname = "Prochazka",Degree = "Mgr",
+                new Client() { Name = "Stanislav", Surname = "Prochazka",
                                 Nationality = "Slovak", PhoneNumber = "479226655", AddressID = addresses[8].Id },
 
-                new Client() { Name = "Šimon", Surname = "Kibaks",Degree = "Ing",
+                new Client() { Name = "Šimon", Surname = "Kibaks",
                                 Nationality = "Slovak", PhoneNumber = "54566", AddressID = addresses[7].Id },
 
-                new Client() { Name = "Vladislav", Surname = "Kincl",Degree = "Mgr",
+                new Client() { Name = "Vladislav", Surname = "Kincl",
                                 Nationality = "Czech", PhoneNumber = "142437", AddressID = addresses[4].Id }
             );
             context.SaveChangesAsync();
@@ -96,7 +96,7 @@ namespace FincoraConsoleAppDemo
 
             context.InsuranceCompanies.AddRangeAsync
             (
-                new InsuranceCompany() { Name = "Alianz", PhoneNumber = "4002437", AddressId = addresses[0].Id },
+                new InsuranceCompany() { Name = "Allianz", PhoneNumber = "4002437", AddressId = addresses[0].Id },
 
                 new InsuranceCompany() { Name = "Generali", PhoneNumber = "5664778", AddressId = addresses[1].Id },
 
@@ -112,16 +112,16 @@ namespace FincoraConsoleAppDemo
         {
             context.Vehicles.AddRangeAsync
             (
-                new Vehicle() { Brand = "Audi", Model = "A5", NumberOfSeats = 5, GearboxType = "automat", 
+                new Vehicle() { Brand = "Audi", Model = "A5", YearOfManufacture = "2016", 
                                  Price = "25000", EvidenceNumber = "7A8 6521" },
 
-                new Vehicle() { Brand = "Audi", Model = "A7", NumberOfSeats = 5, GearboxType = "automat", 
+                new Vehicle() { Brand = "Audi", Model = "A7", YearOfManufacture = "2020", 
                                  Price = "35000", EvidenceNumber = "3B6 4192" },
 
-                new Vehicle() { Brand = "Mazda", Model = "3", NumberOfSeats = 5, GearboxType = "manual", 
+                new Vehicle() { Brand = "Mazda", Model = "3", YearOfManufacture = "2014", 
                                  Price = "15000", EvidenceNumber = "5C1 7409" },
 
-                new Vehicle() { Brand = "Škoda", Model = "Superb", NumberOfSeats = 5, GearboxType = "automat", 
+                new Vehicle() { Brand = "Škoda", Model = "Superb", YearOfManufacture = "2020", 
                                  Price = "20000", EvidenceNumber = "2D9 8374" }
             );
             context.SaveChangesAsync();
@@ -134,7 +134,7 @@ namespace FincoraConsoleAppDemo
 
             var insuranceCompanies = context.InsuranceCompanies.ToList().OrderBy( a => a.Name ).ToList();
 
-            var clients = context.Clients.ToList().OrderBy( a => a.Name ).ToList();
+            var clients = context.Clients.ToList().OrderBy( a => a.Name ).ThenBy(x => x.Surname).ToList();
 
             var vehicles = context.Vehicles.ToList().OrderBy( a => a.Brand).ThenBy( a => a.Model ).ToList();
 

@@ -8,9 +8,9 @@ namespace FincoraConsoleAppDemo.GraphicsUI
 {
     public class CRUDmessages
     {
-        public static void CreateAddress()
+        public static void CreateAddressFirstly()
         {
-            Console.WriteLine("You have to create the corresponding address firstly.");
+            Console.WriteLine("You have to create the corresponding address of new added entity firstly.");
         }
 
 
@@ -23,6 +23,33 @@ namespace FincoraConsoleAppDemo.GraphicsUI
         public static void AddressCreated()
         {
             Console.WriteLine("New address was added successfully.");
+        }
+
+
+        public static void InsuranceTypeCreated()
+        {
+            Console.WriteLine("New insurance type was added successfully.");
+        }
+
+
+        public static void ClientCreated()
+        {
+            Console.WriteLine("New client was added successfully.");
+        }
+
+
+        public static void VehicleCreated() 
+        {
+            Console.WriteLine("New vehicle was added successfully.");
+        }
+
+
+        public static void CreatingContract(int flag)
+        {
+            if (flag == 0) 
+                Console.WriteLine("Would you like to assign new contract to the existing person or create new one ?\n");
+            else 
+                Console.WriteLine("Type \"e\" for existing, \"n\" for creating new:");
         }
     }
 }

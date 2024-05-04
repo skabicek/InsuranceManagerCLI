@@ -27,13 +27,14 @@ namespace FincoraConsoleAppDemo.InputHanding
                     break;
 
                 case "add-instype":
+                    CreateEntity.CreateNewInsType(context);
                     break;
 
                 case "quit":
                     return false;
 
                 default:
-                    InstructionsOutput.InvalidInput();
+                    InstructionsOutput.InvalidArgs();
                     break;
             }
             return true;

@@ -29,7 +29,7 @@ class Program
                 DataSeed.AddingContracts(context);
 
                 InstructionsOutput.IntroductionMessage();
-                while (ProcessInput.ProcessUserInput(context)) ;
+                while (ProcessInput.ProcessUserInput(context));
                 
                 /*var contracts = await context.Contracts.ToListAsync();
                 

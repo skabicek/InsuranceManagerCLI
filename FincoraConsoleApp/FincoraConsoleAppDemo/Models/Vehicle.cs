@@ -13,8 +13,7 @@ namespace FincoraConsoleAppDemo.Models
         public Guid Id { get; set; } = Guid.NewGuid();
         public required string Brand { get; set; }
         public required string Model { get; set; }
-        public required int NumberOfSeats { get; set; }
-        public required string GearboxType { get; set; }
+        public required string YearOfManufacture { get; set; }
         public required string Price { get; set; }
         public List<Contract> Contracts { get; } = [];
         public required string EvidenceNumber { get; set; }

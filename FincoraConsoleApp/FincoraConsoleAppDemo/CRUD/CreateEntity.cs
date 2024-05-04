@@ -11,41 +11,117 @@ namespace FincoraConsoleAppDemo.CRUD
 {
     public class CreateEntity
     {
-        public static void CreateNewClient(MyAppContext context)
+        public static void CreateNewContract(MyAppContext context)
         {
-            Console.WriteLine("For creating the new client, it is necessary to create his address firstly." +
-                "\n Type Country, City, Postal Code, Street and House Number use \";\" as delimiter:");
+            CRUDmessages.CreatingContract(0);
+            string response;
 
-            string addressResponse = Console.ReadLine();
+            while (true)
+            {
+                CRUDmessages.CreatingContract(1);
 
-            string[] AdrIntoList = addressResponse.Split(";");
+                response = Console.ReadLine();
+                if (response.Trim().ToLower().Equals("e") ||
+                     response.Trim().ToLower().Equals("n")) break;
 
-            var adrressToBeAdded = new Address()
-            { 
-                Country = AdrIntoList[0].Trim(), City = AdrIntoList[1].Trim(), PostalCode = AdrIntoList[2].Trim(), 
-                 Street = AdrIntoList[3].Trim(), HouseNumber = AdrIntoList[4].Trim()
+                InstructionsOutput.InvalidArgs();
+            }
+                        // user assigning //
+
+            Client assignedClient;
+
+            if (response.Trim().ToLower().Equals("n")) // Creating new client
+            {
+                CRUDmessages.CreateAddressFirstly();
+                assignedClient = CreateNewClient(context);
+            }
+            else // Choosing from existing clients
+            {
+                int ixOfClient;
+                ListEntities.ListClients(context);
+                InstructionsOutput.SelectClient();
+
+                while (true)
+                {
+                    response = Console.ReadLine();
+                    if (int.TryParse(response, out ixOfClient) && 
+                         ixOfClient > 0 && ixOfClient <= context.Clients.Count()) break;
+
+                    InstructionsOutput.InvalidArgs();
+                }
+                assignedClient = context.Clients.ToList().OrderBy(a => a.Name).ThenBy(x => x.Surname).ToList()[ixOfClient - 1];
+            }
+
+                        // Insurance company assigning //
+            
+
+        }
+
+
+        public static Vehicle CreateNewVehicle(MyAppContext context)
+        {
+            string vehicleResponse;
+            string[] vehicleToList;
+
+            while (true)
+            {
+                InstructionsOutput.ToCreateVehicle();
+
+                vehicleResponse = Console.ReadLine();
+                vehicleToList = vehicleResponse.Split(",");
+
+                if (vehicleToList.Length == 5 &&
+                    int.TryParse(vehicleToList[3].Trim(), out _) &&
+                     int.TryParse(vehicleToList[4].Trim(), out _)) break;
+
+                InstructionsOutput.InvalidArgs();
+            }
+
+            var vehicleToBeAdded = new Vehicle()
+            {
+                EvidenceNumber = vehicleToList[0].Trim(),
+                Brand = vehicleToList[1].Trim(),
+                Model = vehicleToList[2].Trim(),
+                YearOfManufacture = vehicleToList[3].Trim(),
+                Price = vehicleToList[4].Trim(),
             };
-
-            context.AddAsync(adrressToBeAdded);
+            context.Vehicles.AddAsync(vehicleToBeAdded);
             context.SaveChangesAsync();
 
-            Console.WriteLine("Now we can proceed to creating the new client.\n Type Name, Surname, Degree (N for none), Nationality and Phone Number " +
-                "use \";\" as delimiter:");
+            CRUDmessages.VehicleCreated();
+            return vehicleToBeAdded;
+        }
 
-            string clientResponse = Console.ReadLine();
 
-            string[] CliIntoList = clientResponse.Split(";");
+        public static Client CreateNewClient(MyAppContext context)
+        {
+            var corespondingAddress = CreateNewAddress(context);
+ 
+            string clientResponse;
+            string[] clientToList;
+
+            while (true)
+            {
+                InstructionsOutput.ToCreateClient();
+
+                clientResponse = Console.ReadLine();
+                clientToList = clientResponse.Split(",");
+
+                if (clientToList.Length == 4) break;
+
+                InstructionsOutput.InvalidArgs();
+            }
 
             var clientToBeAdded = new Client()
             {
-                Name = CliIntoList[0].Trim(), Surname = CliIntoList[1].Trim(), Degree = CliIntoList[2].Trim(), 
-                 Nationality = CliIntoList[3].Trim(), PhoneNumber = CliIntoList[4].Trim(), AddressID = adrressToBeAdded.Id
+                Name = clientToList[0].Trim(), Surname = clientToList[1].Trim(), 
+                 Nationality = clientToList[2].Trim(), PhoneNumber = clientToList[3].Trim(), AddressID = corespondingAddress.Id
             };
-            context.AddAsync(clientToBeAdded);
+            context.Clients.AddAsync(clientToBeAdded);
             context.SaveChangesAsync();
 
-
-            Console.WriteLine($"foltanova {context.Addresses.Where(x => x.Id == clientToBeAdded.AddressID).First().City}");
+            CRUDmessages.ClientCreated();
+            return clientToBeAdded;
         }
 
 
@@ -63,7 +139,7 @@ namespace FincoraConsoleAppDemo.CRUD
 
                 if (adrToList.Length == 5) break;
 
-                InstructionsOutput.InvalidArgsAmount();
+                InstructionsOutput.InvalidArgs();
             }
 
             var adrressToBeAdded = new Address()
@@ -75,7 +151,7 @@ namespace FincoraConsoleAppDemo.CRUD
                 HouseNumber = adrToList[4].Trim()
             };
 
-            context.AddAsync(adrressToBeAdded);
+            context.Addresses.AddAsync(adrressToBeAdded);
             context.SaveChangesAsync();
 
             CRUDmessages.AddressCreated();
@@ -85,7 +161,7 @@ namespace FincoraConsoleAppDemo.CRUD
 
         public static void CreateNewInsCompany(MyAppContext context)
         {
-            CRUDmessages.CreateAddress();
+            CRUDmessages.CreateAddressFirstly();
 
             var corespondingAddress = CreateNewAddress(context);
 
@@ -101,7 +177,7 @@ namespace FincoraConsoleAppDemo.CRUD
 
                 if (companyToList.Length == 2) break;
 
-                InstructionsOutput.InvalidArgsAmount();
+                InstructionsOutput.InvalidArgs();
             }
 
             var companyToBeAdded = new InsuranceCompany()
@@ -111,10 +187,41 @@ namespace FincoraConsoleAppDemo.CRUD
                 AddressId = corespondingAddress.Id
             };
 
-            context.AddAsync(companyToBeAdded);
+            context.InsuranceCompanies.AddAsync(companyToBeAdded);
             context.SaveChangesAsync();
 
             CRUDmessages.CompanyCreated();
+        }
+
+
+        public static void CreateNewInsType(MyAppContext context)
+        {
+            string insTypeResponse;
+            string[] insTypeToList;
+
+            while (true)
+            {
+                InstructionsOutput.ToCreateInsType();
+
+                insTypeResponse = Console.ReadLine();
+                insTypeToList = insTypeResponse.Split(",");
+
+                if (insTypeToList.Length == 2 &&
+                    (insTypeToList[1].Trim().ToLower().Equals("y") || insTypeToList[1].Trim().ToLower().Equals("n"))) break;
+
+                InstructionsOutput.InvalidArgs();
+            }
+
+            var insTypeToBeAdded = new ContractType()
+            {
+                Name = insTypeToList[0].Trim(),
+                InvolveVehicle = insTypeToList[1].Trim().ToLower().Equals("y") ? 1 : 0  
+            };
+
+            context.ContractTypes.AddAsync(insTypeToBeAdded);
+            context.SaveChangesAsync();
+
+            CRUDmessages.InsuranceTypeCreated();
         }
     }
 }
