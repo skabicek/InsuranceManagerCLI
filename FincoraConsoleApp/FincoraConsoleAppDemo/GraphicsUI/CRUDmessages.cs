@@ -47,9 +47,15 @@ namespace FincoraConsoleAppDemo.GraphicsUI
         public static void CreatingContract(int flag)
         {
             if (flag == 0) 
-                Console.WriteLine("Would you like to assign new contract to the existing person or create new one ?\n");
+                Console.WriteLine("Would you like to assign new contract to the existing person or create new one ?");
             else 
                 Console.WriteLine("Type \"e\" for existing, \"n\" for creating new:");
+        }
+
+
+        public static void ContractCreated()
+        {
+            Console.WriteLine("New contract was added successfully.");
         }
     }
 }

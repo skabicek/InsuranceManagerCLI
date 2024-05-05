@@ -12,6 +12,7 @@ namespace FincoraConsoleAppDemo.Models
     {
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
+        public DateOnly SignDate { get; set; } //Current date by default
         public string Status { get; set; } //Active by default
         public Guid ContractTypeId { get; set; }
         public ContractType ContractType { get; set; }

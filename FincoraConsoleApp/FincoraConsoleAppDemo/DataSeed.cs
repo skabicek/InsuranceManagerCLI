@@ -75,15 +75,15 @@ namespace FincoraConsoleAppDemo
         {
             context.ContractTypes.AddRangeAsync
             (
-                new ContractType() { Name = "Investičné životné poistenie", InvolveVehicle = 0 },
+                new ContractType() { Name = "Investičné životné poistenie", InvolveVehicle = 'N' },
 
-                new ContractType() { Name = "Kapitálové poistenie", InvolveVehicle = 0 },
+                new ContractType() { Name = "Kapitálové poistenie", InvolveVehicle = 'N' },
 
-                new ContractType() { Name = "KASKO", InvolveVehicle = 1 },
+                new ContractType() { Name = "KASKO", InvolveVehicle = 'Y' },
 
-                new ContractType() { Name = "PZP", InvolveVehicle = 1 },
+                new ContractType() { Name = "PZP", InvolveVehicle = 'Y' },
 
-                new ContractType() { Name = "Úrazové poistenie", InvolveVehicle = 0 }
+                new ContractType() { Name = "Úrazové poistenie", InvolveVehicle = 'N' }
 
             );
             context.SaveChangesAsync();
@@ -141,21 +141,21 @@ namespace FincoraConsoleAppDemo
             context.Contracts.AddRangeAsync
             (
                 new Contract() { ContractTypeId = contractTypes[0].Id, ClientId = clients[0].Id, 
-                                  InsuranceCompanyId = insuranceCompanies[0].Id },
+                                  InsuranceCompanyId = insuranceCompanies[0].Id, SignDate = new DateOnly(2024, 4, 26) },
 
-                new Contract() { ContractTypeId = contractTypes[2].Id, ClientId = clients[1].Id, 
+                new Contract() { ContractTypeId = contractTypes[2].Id, ClientId = clients[1].Id, SignDate = new DateOnly(2024, 4, 18),
                                   InsuranceCompanyId = insuranceCompanies[1].Id, VehicleId = vehicles[0].Id },
 
-                new Contract() { ContractTypeId = contractTypes[2].Id, ClientId = clients[2].Id, 
+                new Contract() { ContractTypeId = contractTypes[2].Id, ClientId = clients[2].Id, SignDate = new DateOnly(2024, 3, 20),
                                   InsuranceCompanyId = insuranceCompanies[2].Id, VehicleId = vehicles[1].Id },
 
-                new Contract() { ContractTypeId = contractTypes[3].Id, ClientId = clients[3].Id, 
+                new Contract() { ContractTypeId = contractTypes[3].Id, ClientId = clients[3].Id, SignDate = new DateOnly(2024, 5, 1),
                                   InsuranceCompanyId = insuranceCompanies[2].Id, VehicleId = vehicles[2].Id },
 
                 new Contract() { ContractTypeId = contractTypes[1].Id, ClientId = clients[4].Id, 
-                                  InsuranceCompanyId = insuranceCompanies[3].Id },
+                                  InsuranceCompanyId = insuranceCompanies[3].Id, SignDate = new DateOnly(2024, 4, 29) },
 
-                new Contract() { ContractTypeId = contractTypes[3].Id, ClientId = clients[5].Id, 
+                new Contract() { ContractTypeId = contractTypes[3].Id, ClientId = clients[5].Id, SignDate = new DateOnly(2024, 5, 3),
                                   InsuranceCompanyId = insuranceCompanies[3].Id, VehicleId = vehicles[3].Id }
             );
             context.SaveChangesAsync();

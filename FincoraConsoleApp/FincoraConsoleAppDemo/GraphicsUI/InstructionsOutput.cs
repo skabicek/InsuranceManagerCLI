@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace FincoraConsoleAppDemo.GraphicsUI
 {
     public class InstructionsOutput
@@ -14,9 +9,9 @@ namespace FincoraConsoleAppDemo.GraphicsUI
         }
 
 
-        public static void PossibleCommands()
+        public static void PossibleGeneralCommands()
         {
-            Console.WriteLine("Your options are:\nadd-contract, add-inscompany, add-instype\n");
+            Console.WriteLine("After selecting one option, you will be redirected to choose the category of your selection. Your options are:\nadd, list, quit\n");
         }
 
         public static void InvalidArgs() 
@@ -45,19 +40,36 @@ namespace FincoraConsoleAppDemo.GraphicsUI
 
         public static void ToCreateClient()
         {
-            Console.WriteLine("Provide the Name, Surname, Nationality and Phone Number, use \",\" as delimiter:");
+            Console.WriteLine("Provide the Name, Surname, Nationality and Phone Number of client, use \",\" as delimiter:");
         }
 
 
         public static void ToCreateVehicle()
         {
-            Console.WriteLine("Provide the Evidence Number, Brand, Model, Year of manufacture and price, use \",\" as delimiter:");
+            Console.WriteLine("Provide the Evidence Number, Brand, Model, Year of manufacture and price in \u20AC, use \",\" as delimiter:");
         }
 
 
-        public static void SelectClient() 
+        public static void SelectRowNumber(string model) 
         {
-            Console.WriteLine("Select the number of the client to whom you want to assign the new contract:");
+            Console.WriteLine($"\nSelect the number of the {model} to whom you want to assign the new contract:");
+        }
+
+
+        public static void AddingOptMessage()
+        {
+            Console.WriteLine("What entity would you like to add ?\n" +
+                               "Type:\n\t\"comp\" for insurance company\n\t\"type\" for insurance type\n\t" +
+                                "\"cont\" for contract\n\t\"c\" to cancel adding operation");
+        }
+
+
+        public static void ListingOptMessage()
+        {
+            Console.WriteLine("What type of entities would you like to list ?\n" +
+                               "Type:\n\t\"comp\" for insurance companies\n\t\"type\" for insurance types\n\t" +
+                                "\"cont\" for contracts\n\t\"veh\" for vehicles\n\t\"cli\" for clients" +
+                                 "\n\t\"c\" to cancel listing operation");
         }
     }
 }

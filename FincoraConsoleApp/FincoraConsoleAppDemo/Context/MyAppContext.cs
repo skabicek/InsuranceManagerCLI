@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using FincoraConsoleAppDemo.Models;
 using System.Reflection;
-using Microsoft.Extensions.Logging;
 
 namespace FincoraConsoleAppDemo.Context
 {
@@ -61,10 +60,9 @@ namespace FincoraConsoleAppDemo.Context
                 entity.Property(e => e.VehicleId).IsRequired(false);
                 entity.Property(b => b.Status)
                       .HasDefaultValue("Active");
+                entity.Property(b => b.SignDate)
+                      .HasDefaultValue(DateOnly.FromDateTime(DateTime.Now));
             });
-
-            //DataSeeding.AddingAddresses(modelBuilder);
-
             base.OnModelCreating(modelBuilder);
         }
     }

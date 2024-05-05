@@ -1,20 +1,85 @@
 ﻿using FincoraConsoleAppDemo.Context;
 using FincoraConsoleAppDemo.GraphicsUI;
 using FincoraConsoleAppDemo.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FincoraConsoleAppDemo.CRUD
 {
     public class CreateEntity
     {
+        public static Client AssignClient(string response, MyAppContext context)
+        {
+            Client assignedClient;
+            int selectedRow;
+
+            if (response.Trim().ToLower().Equals("n")) // Creating new client
+            {
+                CRUDmessages.CreateAddressFirstly();
+                assignedClient = CreateNewClient(context);
+            }
+            else // Choosing from existing clients
+            {
+                ListEntities.ListClients(context);
+                InstructionsOutput.SelectRowNumber("client");
+
+                while (true)
+                {
+                    response = Console.ReadLine();
+                    if (int.TryParse(response, out selectedRow) &&
+                         selectedRow > 0 && selectedRow <= context.Clients.Count()) break;
+
+                    InstructionsOutput.InvalidArgs();
+                }
+                assignedClient = context.Clients.ToList().OrderBy(a => a.Name).ThenBy(x => x.Surname).ToList()[selectedRow - 1];
+            }
+            return assignedClient;
+        }
+
+
+        public static int AssignCompany(MyAppContext context)
+        {
+            int selectedRow;
+            string response;
+
+            ListEntities.ListInsCompanies(context);
+            InstructionsOutput.SelectRowNumber("insurance company");
+
+            while (true)
+            {
+                response = Console.ReadLine();
+                if (int.TryParse(response, out selectedRow) &&
+                     selectedRow > 0 && selectedRow <= context.InsuranceCompanies.Count()) break;
+
+                InstructionsOutput.InvalidArgs();
+            }
+            return selectedRow;
+        }
+
+
+        public static int AssignInsType(MyAppContext context)
+        {
+            int selectedRow;
+            string response;
+
+            ListEntities.ListInsTypes(context);
+            InstructionsOutput.SelectRowNumber("insurance type");
+
+            while (true)
+            {
+                response = Console.ReadLine();
+                if (int.TryParse(response, out selectedRow) &&
+                     selectedRow > 0 && selectedRow <= context.ContractTypes.Count()) break;
+
+                InstructionsOutput.InvalidArgs();
+            }
+            return selectedRow;
+        }
+
+
         public static void CreateNewContract(MyAppContext context)
         {
             CRUDmessages.CreatingContract(0);
             string response;
+            int selectedRow;
 
             while (true)
             {
@@ -26,35 +91,36 @@ namespace FincoraConsoleAppDemo.CRUD
 
                 InstructionsOutput.InvalidArgs();
             }
-                        // user assigning //
 
-            Client assignedClient;
+            Client assignedClient = AssignClient(response, context);
 
-            if (response.Trim().ToLower().Equals("n")) // Creating new client
+            selectedRow = AssignCompany(context);
+            InsuranceCompany assignedCompany = context.InsuranceCompanies.ToList().OrderBy(a => a.Name).ToList()[selectedRow - 1];
+
+            selectedRow = AssignInsType(context);
+            ContractType assignedType = context.ContractTypes.ToList().OrderBy(a => a.Name).ToList()[selectedRow - 1];
+
+                        // check whether involve vehicle //
+
+            Vehicle? assignedVehicle = null;
+
+            if (assignedType.InvolveVehicle.Equals('Y'))
             {
-                CRUDmessages.CreateAddressFirstly();
-                assignedClient = CreateNewClient(context);
-            }
-            else // Choosing from existing clients
-            {
-                int ixOfClient;
-                ListEntities.ListClients(context);
-                InstructionsOutput.SelectClient();
-
-                while (true)
-                {
-                    response = Console.ReadLine();
-                    if (int.TryParse(response, out ixOfClient) && 
-                         ixOfClient > 0 && ixOfClient <= context.Clients.Count()) break;
-
-                    InstructionsOutput.InvalidArgs();
-                }
-                assignedClient = context.Clients.ToList().OrderBy(a => a.Name).ThenBy(x => x.Surname).ToList()[ixOfClient - 1];
+                Console.WriteLine("Your selected insurance type involves vehicle.");
+                assignedVehicle = CreateNewVehicle(context);
             }
 
-                        // Insurance company assigning //
-            
+            var contractToBeAdded = new Contract()
+            {
+                ContractTypeId = assignedType.Id,
+                ClientId = assignedClient.Id,
+                InsuranceCompanyId = assignedCompany.Id,
+                VehicleId = assignedVehicle?.Id,
+            };
+            context.Contracts.AddAsync(contractToBeAdded);
+            context.SaveChangesAsync();
 
+            CRUDmessages.ContractCreated();
         }
 
 
@@ -70,9 +136,11 @@ namespace FincoraConsoleAppDemo.CRUD
                 vehicleResponse = Console.ReadLine();
                 vehicleToList = vehicleResponse.Split(",");
 
+
                 if (vehicleToList.Length == 5 &&
-                    int.TryParse(vehicleToList[3].Trim(), out _) &&
-                     int.TryParse(vehicleToList[4].Trim(), out _)) break;
+                    int.TryParse(vehicleToList[4].Trim(), out _) &&
+                     int.TryParse(vehicleToList[3].Trim(), out int yearOfManufacture) &&
+                      yearOfManufacture <= DateOnly.FromDateTime(DateTime.Now).Year) break;
 
                 InstructionsOutput.InvalidArgs();
             }
@@ -215,7 +283,7 @@ namespace FincoraConsoleAppDemo.CRUD
             var insTypeToBeAdded = new ContractType()
             {
                 Name = insTypeToList[0].Trim(),
-                InvolveVehicle = insTypeToList[1].Trim().ToLower().Equals("y") ? 1 : 0  
+                InvolveVehicle = insTypeToList[1].Trim().ToUpper()[0]  
             };
 
             context.ContractTypes.AddAsync(insTypeToBeAdded);

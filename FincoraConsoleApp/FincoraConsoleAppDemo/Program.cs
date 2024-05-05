@@ -1,15 +1,13 @@
 ﻿using FincoraConsoleAppDemo;
 using FincoraConsoleAppDemo.Context;
-using FincoraConsoleAppDemo.CRUD;
 using FincoraConsoleAppDemo.GraphicsUI;
 using FincoraConsoleAppDemo.InputHanding;
-using FincoraConsoleAppDemo.Models;
-using Microsoft.EntityFrameworkCore;
 
 class Program
 {
-    static async Task Main(string[] args)
+    static async Task Main(string[] _)
     {
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
         try
         {
             if (File.Exists("myapp.db"))
@@ -19,7 +17,7 @@ class Program
             {
                 await context.Database.EnsureCreatedAsync();
 
-                // Default data seeding //
+                    // Default data seeding //
 
                 DataSeed.AddingContractTypes(context);
                 DataSeed.AddingAddresses(context);
@@ -29,23 +27,8 @@ class Program
                 DataSeed.AddingContracts(context);
 
                 InstructionsOutput.IntroductionMessage();
+                
                 while (ProcessInput.ProcessUserInput(context));
-                
-                /*var contracts = await context.Contracts.ToListAsync();
-                
-                foreach (var u in contracts)
-                {
-                    Console.WriteLine($"meno: {u.Client.Name}, ContractType u zmluvy: { u.ContractType.Name }");
-                }
-
-                var contractsTypes = await context.ContractTypes.ToListAsync();
-
-                foreach (var u in contractsTypes)
-                {
-                    Console.WriteLine($"ID: {u.Id}, Type: {u.Name}");
-                }*/
-
-                //CreateEntity.CreateNewClient(context);
             }
         }
         catch (Exception ex)
