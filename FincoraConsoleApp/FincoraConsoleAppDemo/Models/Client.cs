@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FincoraConsoleAppDemo.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace FincoraConsoleAppDemo.Models
 {
-    public class Client
+    public class Client : IAddressable
     {
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();

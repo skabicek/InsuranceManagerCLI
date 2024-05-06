@@ -129,7 +129,7 @@ namespace FincoraConsoleAppDemo.CRUD
             Console.WriteLine($"{"   Name".PadRight(longestNameLen + 3)} | {"Surname".PadRight(longestSurnameLen)} | " +
                                $"{"Ins Type".PadRight(longestInsTypeLen)} | {"Company".PadRight(longestInsCompLen)} | " +
                                 $"{"Vehicle".PadRight(longestVehicleNameLen)} | {"ECV".PadRight(longestVehicleEcvLen)} | " +
-                                 $"{"Sign date",-10}\n");
+                                 $"{"Sign date",-11} | {"Status",-8}\n");
 
             for (int i = 0; i < contracts.Count; i++)
             {
@@ -144,7 +144,7 @@ namespace FincoraConsoleAppDemo.CRUD
                                      $"{contracts[i].InsuranceCompany.Name.PadRight(longestInsCompLen)} | " +
                                       $"{vehicleName.PadRight(longestVehicleNameLen)} | " +
                                        $"{vehicleEcv.PadRight(longestVehicleEcvLen)} | " +
-                                        $"{contracts[i].SignDate}");
+                                        $"{contracts[i].SignDate, -11} | {contracts[i].Status}");
             }
         }
 

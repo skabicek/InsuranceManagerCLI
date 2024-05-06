@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace FincoraConsoleAppDemo.GraphicsUI
 {
     public class CRUDmessages
@@ -56,6 +51,18 @@ namespace FincoraConsoleAppDemo.GraphicsUI
         public static void ContractCreated()
         {
             Console.WriteLine("New contract was added successfully.");
+        }
+
+
+        public static void ChangeCertainAttr()
+        {
+            Console.WriteLine("Type \"-\" when you don't want to change certain attribute");
+        }
+
+
+        public static void SuccessfullyUpdated(string entity)
+        {
+            Console.WriteLine($"The {entity} was successfully updated.\n");
         }
     }
 }

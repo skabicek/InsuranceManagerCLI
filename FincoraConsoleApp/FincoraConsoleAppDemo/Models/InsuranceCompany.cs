@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FincoraConsoleAppDemo.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace FincoraConsoleAppDemo.Models
 {
-    public class InsuranceCompany
+    public class InsuranceCompany : IAddressable
     {
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();

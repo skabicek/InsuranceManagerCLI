@@ -19,7 +19,7 @@ namespace FincoraConsoleAppDemo.CRUD
             else // Choosing from existing clients
             {
                 ListEntities.ListClients(context);
-                InstructionsOutput.SelectRowNumber("client");
+                InstructionsOutput.SelectRowNumberCr("client");
 
                 while (true)
                 {
@@ -41,7 +41,7 @@ namespace FincoraConsoleAppDemo.CRUD
             string response;
 
             ListEntities.ListInsCompanies(context);
-            InstructionsOutput.SelectRowNumber("insurance company");
+            InstructionsOutput.SelectRowNumberCr("insurance company");
 
             while (true)
             {
@@ -61,7 +61,7 @@ namespace FincoraConsoleAppDemo.CRUD
             string response;
 
             ListEntities.ListInsTypes(context);
-            InstructionsOutput.SelectRowNumber("insurance type");
+            InstructionsOutput.SelectRowNumberCr("insurance type");
 
             while (true)
             {

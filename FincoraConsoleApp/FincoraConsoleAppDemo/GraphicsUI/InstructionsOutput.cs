@@ -11,7 +11,8 @@ namespace FincoraConsoleAppDemo.GraphicsUI
 
         public static void PossibleGeneralCommands()
         {
-            Console.WriteLine("After selecting one option, you will be redirected to choose the category of your selection. Your options are:\nadd, list, quit\n");
+            Console.WriteLine("After selecting one option, you will be redirected to choose the category of your selection. " +
+                               "Your options are:\nadd, list, update, quit\n");
         }
 
         public static void InvalidArgs() 
@@ -50,7 +51,7 @@ namespace FincoraConsoleAppDemo.GraphicsUI
         }
 
 
-        public static void SelectRowNumber(string model) 
+        public static void SelectRowNumberCr(string model) 
         {
             Console.WriteLine($"\nSelect the number of the {model} to whom you want to assign the new contract:");
         }
@@ -69,6 +70,15 @@ namespace FincoraConsoleAppDemo.GraphicsUI
             Console.WriteLine("What type of entities would you like to list ?\n" +
                                "Type:\n\t\"comp\" for insurance companies\n\t\"type\" for insurance types\n\t" +
                                 "\"cont\" for contracts\n\t\"veh\" for vehicles\n\t\"cli\" for clients" +
+                                 "\n\t\"c\" to cancel listing operation");
+        }
+
+
+        public static void UpdatingOptMessage()
+        {
+            Console.WriteLine("What entity would you like to update ?\n" +
+                               "Type:\n\t\"cli\" for updating client info\n\t\"comp\" for updating insurance company info\n\t" +
+                                "\"veh\" for updating vehicle stats\n\t\"cont\" for updating contract status\n\t\"type\" for updating insurance type name" +
                                  "\n\t\"c\" to cancel listing operation");
         }
     }

@@ -22,6 +22,10 @@ namespace FincoraConsoleAppDemo.InputHanding
                     ProcessListOption(context);
                     break;
 
+                case "update":
+                    ProcessUpdateOption(context);
+                    break;
+
                 case "quit":
                     return false;
 
@@ -98,6 +102,45 @@ namespace FincoraConsoleAppDemo.InputHanding
                 default:
                     InstructionsOutput.InvalidArgs();
                     ProcessListOption(context);
+                    break;
+            }
+        }
+
+
+        public static void ProcessUpdateOption(MyAppContext context)
+        {
+            InstructionsOutput.UpdatingOptMessage();
+
+            string userInput = Console.ReadLine();
+
+            switch (userInput.Trim().ToLower())
+            {
+                case "cont":
+                    UpdateEntity.UpdateContStatus(context);
+                    break;
+
+                case "comp":
+                    UpdateEntity.UpdateComp(context);
+                    break;
+
+                case "type":
+                    UpdateEntity.UpdateInsType(context);
+                    break;
+
+                case "cli":
+                    UpdateEntity.UpdateClient(context);
+                    break;
+
+                case "veh":
+                    UpdateEntity.UpdateVehicle(context);
+                    break;
+
+                case "c":
+                    break;
+
+                default:
+                    InstructionsOutput.InvalidArgs();
+                    ProcessUpdateOption(context);
                     break;
             }
         }
