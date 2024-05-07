@@ -45,7 +45,7 @@ namespace FincoraConsoleAppDemo.Context
             modelBuilder.Entity<Client>(entity =>
             {
                 entity.HasKey(e => e.Id);
-                entity.HasIndex(e => e.PhoneNumber).IsUnique();
+                entity.HasIndex(e => e.PhoneNumber).IsUnique(); 
             });
 
             modelBuilder.Entity<Vehicle>(entity =>

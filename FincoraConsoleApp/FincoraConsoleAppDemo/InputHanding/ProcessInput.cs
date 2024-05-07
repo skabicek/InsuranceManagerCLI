@@ -1,5 +1,6 @@
 ﻿using FincoraConsoleAppDemo.Context;
 using FincoraConsoleAppDemo.CRUD;
+using FincoraConsoleAppDemo.Filtering;
 using FincoraConsoleAppDemo.GraphicsUI;
 
 namespace FincoraConsoleAppDemo.InputHanding
@@ -12,7 +13,7 @@ namespace FincoraConsoleAppDemo.InputHanding
 
             string userInput = Console.ReadLine();
 
-            switch (userInput)
+            switch (userInput.Trim().ToLower())
             {
                 case "add":
                     ProcessAddOption(context);
@@ -24,6 +25,14 @@ namespace FincoraConsoleAppDemo.InputHanding
 
                 case "update":
                     ProcessUpdateOption(context);
+                    break;
+
+                case "delete":
+                    ProcessDeleteOption(context);
+                    break;
+
+                case "filter":
+                    ProcessFilterOption(context);
                     break;
 
                 case "quit":
@@ -57,6 +66,11 @@ namespace FincoraConsoleAppDemo.InputHanding
                     CreateEntity.CreateNewInsType(context);
                     break;
 
+                case "cli":
+                    CRUDmessages.CreateAddressFirstly();
+                    CreateEntity.CreateNewClient(context);
+                    break;
+
                 case "c":
                     break;
 
@@ -77,23 +91,23 @@ namespace FincoraConsoleAppDemo.InputHanding
             switch (userInput.Trim().ToLower())
             {
                 case "cont":
-                    ListEntities.ListContracts(context);
+                    ListEntities.ListContracts([.. context.Contracts.ToList().OrderBy(a => a.SignDate)], "");
                     break;
 
                 case "comp":
-                    ListEntities.ListInsCompanies(context);
+                    ListEntities.ListInsCompanies([.. context.InsuranceCompanies.ToList().OrderBy(a => a.Name)], "");
                     break;
 
                 case "type":
-                    ListEntities.ListInsTypes(context);
+                    ListEntities.ListInsTypes([.. context.ContractTypes.ToList().OrderBy(a => a.Name)]);
                     break;
 
                 case "cli":
-                    ListEntities.ListClients(context);
+                    ListEntities.ListClients([.. context.Clients.ToList().OrderBy(a => a.Name).ThenBy(x => x.Surname)], "");
                     break;
 
                 case "veh":
-                    ListEntities.ListVehicles(context);
+                    ListEntities.ListVehicles([.. context.Vehicles.ToList().OrderBy(a => a.Brand).ThenBy(a => a.Model)]);
                     break;
 
                 case "c":
@@ -141,6 +155,92 @@ namespace FincoraConsoleAppDemo.InputHanding
                 default:
                     InstructionsOutput.InvalidArgs();
                     ProcessUpdateOption(context);
+                    break;
+            }
+        }
+
+
+        public static void ProcessDeleteOption(MyAppContext context)
+        {
+            InstructionsOutput.DeletingOptMessage();
+
+            string userInput = Console.ReadLine();
+
+            switch (userInput.Trim().ToLower())
+            {
+                case "cli":
+                    DeleteEntity.DeleteClientsWithoutContr(context);
+                    break;
+
+                case "cont":
+                    DeleteEntity.DeleteStornedContrs(context);
+                    break;
+
+                case "comp":
+                    DeleteEntity.DeleteCompsWithoutContr(context);
+                    break;
+
+                case "c":
+                    break;
+
+                default:
+                    InstructionsOutput.InvalidArgs();
+                    ProcessDeleteOption(context);
+                    break;
+            }
+        }
+
+
+        public static void ProcessFilterOption(MyAppContext context)
+        {
+            InstructionsOutput.FilteringOptMessage();
+
+            string userInput = Console.ReadLine();
+
+            switch (userInput.Trim().ToLower())
+            {
+                case "cli-am":
+                    FilterClients.OnAmount(context);
+                    break;
+
+                case "cli-nat":
+                    FilterClients.OnNationality(context);
+                    break;
+
+                case "cont-type":
+                    FilterContracts.OnInsType(context);
+                    break;
+
+                case "cont-comp":
+                    FilterContracts.OnInsCompany(context);
+                    break;
+
+                case "cont-veh":
+                    FilterContracts.OnVehicle(context);
+                    break;
+
+                case "cont-date":
+                    FilterContracts.OnSignDate(context);
+                    break;
+
+                case "veh-brand":
+                    FilterVehicles.OnBrand(context);
+                    break;
+
+                case "veh-price":
+                    FilterVehicles.OnPrice(context);
+                    break;
+
+                case "veh-date":
+                    FilterVehicles.OnManufactureDate(context);
+                    break;
+
+                case "c":
+                    break;
+
+                default:
+                    InstructionsOutput.InvalidArgs();
+                    ProcessDeleteOption(context);
                     break;
             }
         }

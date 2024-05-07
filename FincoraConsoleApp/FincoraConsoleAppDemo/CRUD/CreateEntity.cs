@@ -18,7 +18,7 @@ namespace FincoraConsoleAppDemo.CRUD
             }
             else // Choosing from existing clients
             {
-                ListEntities.ListClients(context);
+                ListEntities.ListClients([.. context.Clients.ToList().OrderBy(a => a.Name).ThenBy(x => x.Surname)], "");
                 InstructionsOutput.SelectRowNumberCr("client");
 
                 while (true)
@@ -40,7 +40,7 @@ namespace FincoraConsoleAppDemo.CRUD
             int selectedRow;
             string response;
 
-            ListEntities.ListInsCompanies(context);
+            ListEntities.ListInsCompanies([.. context.InsuranceCompanies.ToList().OrderBy(a => a.Name)], "");
             InstructionsOutput.SelectRowNumberCr("insurance company");
 
             while (true)
@@ -60,7 +60,7 @@ namespace FincoraConsoleAppDemo.CRUD
             int selectedRow;
             string response;
 
-            ListEntities.ListInsTypes(context);
+            ListEntities.ListInsTypes([.. context.ContractTypes.ToList().OrderBy(a => a.Name)]);
             InstructionsOutput.SelectRowNumberCr("insurance type");
 
             while (true)

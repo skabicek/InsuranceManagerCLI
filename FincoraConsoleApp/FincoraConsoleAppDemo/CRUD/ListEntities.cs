@@ -1,12 +1,18 @@
-﻿using FincoraConsoleAppDemo.Context;
+﻿using FincoraConsoleAppDemo.Models;
 
 namespace FincoraConsoleAppDemo.CRUD
 {
     public class ListEntities
     {
-        public static void ListClients(MyAppContext context)
+        public static void ListClients(List<Client> clients, string message)
         {
-            var clients = context.Clients.ToList().OrderBy(a => a.Name).ThenBy(x => x.Surname).ToList();
+            //var clients = context.Clients.ToList().OrderBy(a => a.Name).ThenBy(x => x.Surname).ToList();
+
+            if (clients.Count == 0)
+            {
+                Console.WriteLine("No clients were found");
+                return;
+            }
 
             int longestNameLen = clients.Select(x => x.Name)
                                         .OrderBy(name => name.Length * -1)
@@ -29,10 +35,12 @@ namespace FincoraConsoleAppDemo.CRUD
                                            .OrderBy(phone => phone.Length * -1)
                                            .First().Length;
 
+            longestNameLen = "Name".Length > longestNameLen ? "Name".Length : longestNameLen;
+            longestSurnameLen = "Surname".Length > longestSurnameLen ? "Surname".Length : longestSurnameLen;
+            longestPhoneLen = "Phone".Length > longestPhoneLen ? "Phone".Length : longestPhoneLen;
             longestNationalityLen = "Nationality".Length > longestNationalityLen ? "Nationality".Length : longestNationalityLen;
 
-
-            Console.WriteLine("List of all registred clients:\n");
+            Console.WriteLine($"List of all registred clients{message}:\n");
             Console.WriteLine($"{"   Name".PadRight(longestNameLen + 3)} | {"Surname".PadRight(longestSurnameLen)} | " +
                                $"{"Nationality".PadRight(longestNationalityLen > "Nationality".Length ? longestNationalityLen : "Nationality".Length)} " +
                                 $"| {"Phone".PadRight(longestPhoneLen)} | {"Address".PadRight(longestAddressLen)}\n");
@@ -47,9 +55,15 @@ namespace FincoraConsoleAppDemo.CRUD
         }
 
 
-        public static void ListInsCompanies(MyAppContext context)
+        public static void ListInsCompanies(List<InsuranceCompany> insCompanies, string message)
         {
-            var insCompanies = context.InsuranceCompanies.ToList().OrderBy(a => a.Name).ToList();
+            //var insCompanies = context.InsuranceCompanies.ToList().OrderBy(a => a.Name).ToList();
+
+            if (insCompanies.Count == 0)
+            {
+                Console.WriteLine("No insurance companies were found");
+                return;
+            }
 
             int longestNameLen = insCompanies.Select(x => x.Name)
                                              .OrderBy(name => name.Length * -1)
@@ -64,7 +78,9 @@ namespace FincoraConsoleAppDemo.CRUD
                                                 .OrderBy(phone => phone.Length * -1)
                                                 .First().Length;
 
-            Console.WriteLine("List of all registred companies:\n");
+            longestNameLen = "Name".Length > longestNameLen ? "Name".Length : longestNameLen;
+
+            Console.WriteLine($"List of all registred companies{message}:\n");
             Console.WriteLine($"{"   Name".PadRight(longestNameLen + 3)} | {"Phone".PadRight(longestPhoneLen)} | {"Address".PadRight(longestAddressLen)}\n");
 
             for (int i = 0; i < insCompanies.Count; i++)
@@ -77,9 +93,15 @@ namespace FincoraConsoleAppDemo.CRUD
         }
 
 
-        public static void ListInsTypes(MyAppContext context)
+        public static void ListInsTypes(List<ContractType> contractTypes)
         {
-            var contractTypes = context.ContractTypes.ToList().OrderBy(a => a.Name).ToList();
+            //var contractTypes = context.ContractTypes.ToList().OrderBy(a => a.Name).ToList();
+
+            if (contractTypes.Count == 0)
+            {
+                Console.WriteLine("No insurance types were found.");
+                return;
+            }
 
             int longestNameLen = contractTypes.Select(x => x.Name)
                                               .OrderBy(name => name.Length * -1)
@@ -95,9 +117,15 @@ namespace FincoraConsoleAppDemo.CRUD
         }
 
 
-        public static void ListContracts(MyAppContext context)
+        public static void ListContracts(List<Contract> contracts, string message)
         {
-            var contracts = context.Contracts.ToList().OrderBy(a => a.SignDate).ToList();
+            //var contracts = context.Contracts.ToList().OrderBy(a => a.SignDate).ToList();
+
+            if (contracts.Count == 0)
+            {
+                Console.WriteLine("No contracts were found.");
+                return;
+            }
 
             int longestNameLen = contracts.Select(x => x.Client.Name)
                                           .OrderBy(name => name.Length * -1)
@@ -115,17 +143,27 @@ namespace FincoraConsoleAppDemo.CRUD
                                              .OrderBy(name => name.Length * -1)
                                              .First().Length;
 
-            int longestVehicleEcvLen = contracts.Where(x => x.Vehicle != null)
-                                                .Select(x => x.Vehicle.EvidenceNumber)
-                                                .OrderBy(name => name.Length * -1)
-                                                .First().Length;
+            var ecvList = contracts.Where(x => x.Vehicle != null)
+                                   .Select(x => x.Vehicle.EvidenceNumber)
+                                   .OrderBy(name => name.Length * -1)
+                                   .ToList();
 
-            int longestVehicleNameLen = contracts.Where(x => x.Vehicle != null)
-                                                 .Select(x => x.Vehicle.Brand + " " + x.Vehicle.Model)
-                                                 .OrderBy(name => name.Length * -1)
-                                                 .First().Length;
+            int longestVehicleEcvLen = ecvList.Count > 0 ? ecvList.First().Length : 4;
 
-            Console.WriteLine("List of all contracts:\n");
+            var vehList = contracts.Where(x => x.Vehicle != null)
+                                   .Select(x => x.Vehicle.Brand + " " + x.Vehicle.Model)
+                                   .OrderBy(name => name.Length * -1)
+                                   .ToList();
+
+            int longestVehicleNameLen = vehList.Count > 0 ? vehList.First().Length : 7;
+
+            longestNameLen = "Name".Length > longestNameLen ? "Name".Length : longestNameLen;
+            longestSurnameLen = "Surname".Length > longestSurnameLen ? "Surname".Length : longestSurnameLen;
+            longestInsCompLen = "Company".Length > longestInsCompLen ? "Company".Length : longestInsCompLen;
+            longestInsTypeLen = "Ins Type".Length > longestInsTypeLen ? "Ins Type".Length : longestInsTypeLen;
+            longestVehicleNameLen = "Vehicle".Length > longestVehicleNameLen ? "Vehicle".Length : longestVehicleNameLen;
+
+            Console.WriteLine($"List of all contracts:{message}\n");
             Console.WriteLine($"{"   Name".PadRight(longestNameLen + 3)} | {"Surname".PadRight(longestSurnameLen)} | " +
                                $"{"Ins Type".PadRight(longestInsTypeLen)} | {"Company".PadRight(longestInsCompLen)} | " +
                                 $"{"Vehicle".PadRight(longestVehicleNameLen)} | {"ECV".PadRight(longestVehicleEcvLen)} | " +
@@ -145,13 +183,19 @@ namespace FincoraConsoleAppDemo.CRUD
                                       $"{vehicleName.PadRight(longestVehicleNameLen)} | " +
                                        $"{vehicleEcv.PadRight(longestVehicleEcvLen)} | " +
                                         $"{contracts[i].SignDate, -11} | {contracts[i].Status}");
-            }
+            } 
         }
 
 
-        public static void ListVehicles(MyAppContext context)
+        public static void ListVehicles(List<Vehicle> vehicles)
         {
-            var vehicles = context.Vehicles.ToList().OrderBy(a => a.Brand).ThenBy(a => a.Model).ToList();
+            //var vehicles = context.Vehicles.ToList().OrderBy(a => a.Brand).ThenBy(a => a.Model).ToList();
+
+            if (vehicles.Count == 0)
+            {
+                Console.WriteLine("No vehicles were found.");
+                return;
+            }
 
             int longestVehicleEcvLen = vehicles.Select(x => x.EvidenceNumber)
                                                .OrderBy(name => name.Length * -1)

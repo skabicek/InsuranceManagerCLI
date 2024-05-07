@@ -64,5 +64,29 @@ namespace FincoraConsoleAppDemo.GraphicsUI
         {
             Console.WriteLine($"The {entity} was successfully updated.\n");
         }
+
+
+        public static void SuccessfullyDeleted(string entity)
+        {
+            Console.WriteLine($"All {entity} have been deleted.");
+        }
+
+
+        public static void ConfirmDeleting(string entity)
+        {
+            if (entity.Equals("comp"))
+            {
+                Console.WriteLine("\nDo you want to delete companies printed above? Addresses assigned to the companies will be deleted as well.\n");
+            }
+            else if (entity.Equals("cli"))
+            {
+                Console.WriteLine("\nDo you want to delete clients printed above? Addresses assigned to the clients will be deleted as well.\n");
+            }
+            else
+            {
+                Console.WriteLine("\nDo you want to delete contracts printed above? Vehicles assigned to the contracts will be deleted as well.\n");
+            }
+            Console.WriteLine("Press \"y\" for yes or \"n\" for returning to the main menu:");
+        }
     }
 }

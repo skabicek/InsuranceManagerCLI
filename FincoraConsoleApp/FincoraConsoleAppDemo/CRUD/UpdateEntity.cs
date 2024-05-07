@@ -9,7 +9,7 @@ namespace FincoraConsoleAppDemo.CRUD
     {
         public static async void UpdateVehicle(MyAppContext context)
         {
-            ListEntities.ListVehicles(context);
+            ListEntities.ListVehicles([.. context.Vehicles.ToList().OrderBy(a => a.Brand).ThenBy(a => a.Model)]);
             Console.WriteLine("Select the vehicle number for updating:");
 
             string? response;
@@ -62,7 +62,7 @@ namespace FincoraConsoleAppDemo.CRUD
 
         public static async void UpdateInsType(MyAppContext context)
         {
-            ListEntities.ListInsTypes(context);
+            ListEntities.ListInsTypes([.. context.ContractTypes.ToList().OrderBy(a => a.Name)]);
             Console.WriteLine("Select the insurance type number to update its name:");
 
             string? response;
@@ -90,7 +90,7 @@ namespace FincoraConsoleAppDemo.CRUD
 
         public static async void UpdateContStatus(MyAppContext context)
         {
-            ListEntities.ListContracts(context);
+            ListEntities.ListContracts([.. context.Contracts.ToList().OrderBy(a => a.SignDate)], "");
             Console.WriteLine("Select the contract number to update its status to storno:");
 
             var contract = context.Contracts.ToList().OrderBy(a => a.SignDate).ToList()[SelectRowNumber(context.Contracts.Count())];
@@ -107,7 +107,7 @@ namespace FincoraConsoleAppDemo.CRUD
 
         public static async void UpdateComp(MyAppContext context)
         {
-            ListEntities.ListInsCompanies(context);
+            ListEntities.ListInsCompanies([.. context.InsuranceCompanies.ToList().OrderBy(a => a.Name)], "");
             Console.WriteLine("Select the company number for updating:");
 
             string? response;
@@ -147,7 +147,7 @@ namespace FincoraConsoleAppDemo.CRUD
 
         public static async void UpdateClient(MyAppContext context)
         {
-            ListEntities.ListClients(context);
+            ListEntities.ListClients([.. context.Clients.ToList().OrderBy(a => a.Name).ThenBy(x => x.Surname)], "");
             Console.WriteLine("Select the client number for updating:");
 
             string? response;
