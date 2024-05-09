@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using FincoraConsoleAppDemo.Models;
-using System.Reflection;
 
 namespace FincoraConsoleAppDemo.Context
 {
@@ -15,11 +14,17 @@ namespace FincoraConsoleAppDemo.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Filename=myapp.db", option =>
+            /*var basePath = AppDomain.CurrentDomain.BaseDirectory;
+            var dbPath = Path.Combine(basePath, "myapp.db");
+
+            optionsBuilder.UseSqlite($"Filename={dbPath}", option =>
             {
                 option.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
             });
-            base.OnConfiguring(optionsBuilder);
+            base.OnConfiguring(optionsBuilder);*/
+
+            string dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "myapp.db");
+            optionsBuilder.UseLazyLoadingProxies().UseSqlite($"Filename={dbPath}");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -1,14 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 
 namespace FincoraConsoleAppDemo.Models
 {
     public class ContractType
     {
-        [Key]
+        [Key, JsonIgnore]
         public Guid Id { get; set; } = Guid.NewGuid();
         public required string Name { get; set; }
         public required char InvolveVehicle { get; set; }
-        public List<Contract> Contracts { get; } = [];
+        [JsonIgnore]
+        public virtual List<Contract> Contracts { get; } = [];
     }
 }

@@ -1,5 +1,6 @@
 ﻿using FincoraConsoleAppDemo.Context;
 using FincoraConsoleAppDemo.CRUD;
+using FincoraConsoleAppDemo.Export;
 using FincoraConsoleAppDemo.Filtering;
 using FincoraConsoleAppDemo.GraphicsUI;
 
@@ -33,6 +34,14 @@ namespace FincoraConsoleAppDemo.InputHanding
 
                 case "filter":
                     ProcessFilterOption(context);
+                    break;
+
+                case "statistics":
+                    Statistics.PrintOutStats(context);
+                    break;
+
+                case "export":
+                    ProcessExportOption(context);
                     break;
 
                 case "quit":
@@ -241,6 +250,45 @@ namespace FincoraConsoleAppDemo.InputHanding
                 default:
                     InstructionsOutput.InvalidArgs();
                     ProcessDeleteOption(context);
+                    break;
+            }
+        }
+
+
+        public static void ProcessExportOption(MyAppContext context)
+        {
+            InstructionsOutput.ExportingOptMessage();
+
+            string userInput = Console.ReadLine();
+
+            switch (userInput.Trim().ToLower())
+            {
+                case "cont":
+                    JsonExport.ExportJSON(context, "cont");
+                    break;
+
+                case "comp":
+                    JsonExport.ExportJSON(context, "comp");
+                    break;
+
+                case "type":
+                    JsonExport.ExportJSON(context, "type");
+                    break;
+
+                case "cli":
+                    JsonExport.ExportJSON(context, "cli");
+                    break;
+
+                case "veh":
+                    JsonExport.ExportJSON(context, "veh");
+                    break;
+
+                case "c":
+                    break;
+
+                default:
+                    InstructionsOutput.InvalidArgs();
+                    ProcessExportOption(context);
                     break;
             }
         }

@@ -2,6 +2,7 @@
 using FincoraConsoleAppDemo.Context;
 using FincoraConsoleAppDemo.GraphicsUI;
 using FincoraConsoleAppDemo.InputHanding;
+using Microsoft.EntityFrameworkCore;
 
 class Program
 {
@@ -10,22 +11,25 @@ class Program
         Console.OutputEncoding = System.Text.Encoding.UTF8;
         try
         {
-            if (File.Exists("myapp.db"))
-                File.Delete("myapp.db");
+            /*if (File.Exists("myapp.db")) 
+                File.Delete("myapp.db");*/
+            bool seedFlag = !File.Exists("myapp.db");
 
             using (var context = new MyAppContext())
             {
-                await context.Database.EnsureCreatedAsync();
+                await context.Database.MigrateAsync();
 
-                    // Default data seeding //
-
-                DataSeed.AddingContractTypes(context);
-                DataSeed.AddingAddresses(context);
-                DataSeed.AddingClients(context);
-                DataSeed.AddingInsuranceCompanies(context);
-                DataSeed.AddingVehicles(context);
-                DataSeed.AddingContracts(context);
-
+                        // Default data seeding //
+                if (seedFlag)
+                {
+                    DataSeed.AddingContractTypes(context);
+                    DataSeed.AddingAddresses(context);
+                    DataSeed.AddingClients(context);
+                    DataSeed.AddingInsuranceCompanies(context);
+                    DataSeed.AddingVehicles(context);
+                    DataSeed.AddingContracts(context);
+                }
+                await context.SaveChangesAsync();
                 InstructionsOutput.IntroductionMessage();
                 
                 while (ProcessInput.ProcessUserInput(context));

@@ -12,7 +12,7 @@ namespace FincoraConsoleAppDemo.GraphicsUI
         public static void PossibleGeneralCommands()
         {
             Console.WriteLine("\nAfter selecting one option, you will be redirected to choose the category of your selection. " +
-                               "Your options are:\nadd, list, update, delete, filter, quit\n");
+                               "Your options are:\nadd, list, update, delete, filter, statistics, export, quit\n");
         }
 
         public static void InvalidArgs() 
@@ -99,6 +99,15 @@ namespace FincoraConsoleAppDemo.GraphicsUI
                                 "\"cont-comp\" for filter contracts on insurance company\n\t\"cont-veh\" for filter contracts that (not) contains vehicle\n\t\"cont-date\" displays contracts that are not older than the number of days you specified" +
                                  "\n\n\t\"veh-brand\" for filter vehicles on brand\n\t\"veh-price\" for filter vehicles on price\n\t\"veh-date\" displays vehicles manufactured in the year you specified and later" +
                                   "\n\n\t\"c\" to cancel listing operation");
+        }
+
+
+        public static void ExportingOptMessage()
+        {
+            Console.WriteLine("What type of entities would you like to export ?\n" +
+                               "Type:\n\t\"comp\" for insurance companies\n\t\"type\" for insurance types\n\t" +
+                                "\"cont\" for contracts\n\t\"veh\" for vehicles\n\t\"cli\" for clients" +
+                                 "\n\t\"c\" to cancel exporting operation");
         }
     }
 }

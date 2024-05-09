@@ -1,26 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+
 
 namespace FincoraConsoleAppDemo.Models
 {
     public class Contract
     {
-        [Key]
+        [Key, JsonIgnore]
         public Guid Id { get; set; } = Guid.NewGuid();
         public DateOnly SignDate { get; set; } //Current date by default
         public string Status { get; set; } //Active by default
+        [JsonIgnore]
         public Guid ContractTypeId { get; set; }
-        public ContractType ContractType { get; set; }
+        public virtual ContractType ContractType { get; set; }
+        [JsonIgnore]
         public Guid ClientId { get; set; }
-        public Client Client { get; set; }
+        public virtual Client Client { get; set; }
+        [JsonIgnore]
         public Guid InsuranceCompanyId { get; set; }
-        public InsuranceCompany InsuranceCompany { get; set; }
+        public virtual InsuranceCompany InsuranceCompany { get; set; }
+        [JsonIgnore]
         public Nullable<Guid> VehicleId { get; set; }
-        public Vehicle Vehicle { get; set; }
+        public virtual Vehicle Vehicle { get; set; }
     }
 }
