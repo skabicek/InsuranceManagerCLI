@@ -1,0 +1,80 @@
+﻿[
+  {
+    "Name": "Filip",
+    "Surname": "Barovsky",
+    "Nationality": "Slovak",
+    "PhoneNumber": "44452456",
+    "Address": {
+      "Country": "Slovakia",
+      "City": "Bereseg",
+      "PostalCode": "92001",
+      "Street": "Frobadurska",
+      "HouseNumber": "11"
+    }
+  },
+  {
+    "Name": "Patrik",
+    "Surname": "Landovsky",
+    "Nationality": "Slovak",
+    "PhoneNumber": "778847",
+    "Address": {
+      "Country": "Slovakia",
+      "City": "Nitra",
+      "PostalCode": "94901",
+      "Street": "Mostn\u00E1",
+      "HouseNumber": "17"
+    }
+  },
+  {
+    "Name": "Jaroslav",
+    "Surname": "Novotn\u00FD",
+    "Nationality": "Czech",
+    "PhoneNumber": "759994",
+    "Address": {
+      "Country": "Czech Republic",
+      "City": "Brno",
+      "PostalCode": "60204",
+      "Street": "\u010Cesk\u00E1",
+      "HouseNumber": "3"
+    }
+  },
+  {
+    "Name": "Vladislav",
+    "Surname": "Kincl",
+    "Nationality": "Czech",
+    "PhoneNumber": "142437",
+    "Address": {
+      "Country": "Czech Republic",
+      "City": "Ostrava",
+      "PostalCode": "70030",
+      "Street": "\u0160t\u00FArova",
+      "HouseNumber": "65/C"
+    }
+  },
+  {
+    "Name": "Stanislav",
+    "Surname": "Prochazka",
+    "Nationality": "Slovak",
+    "PhoneNumber": "479226655",
+    "Address": {
+      "Country": "Slovakia",
+      "City": "Trnava",
+      "PostalCode": "91701",
+      "Street": "Kapitalska",
+      "HouseNumber": "9"
+    }
+  },
+  {
+    "Name": "\u0160imon",
+    "Surname": "Kibaks",
+    "Nationality": "Slovak",
+    "PhoneNumber": "54566",
+    "Address": {
+      "Country": "Slovakia",
+      "City": "Trnava",
+      "PostalCode": "91701",
+      "Street": "Holl\u00E9ho",
+      "HouseNumber": "19"
+    }
+  }
+]

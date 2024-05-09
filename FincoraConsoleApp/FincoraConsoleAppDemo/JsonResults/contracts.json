@@ -1,0 +1,222 @@
+﻿[
+  {
+    "SignDate": "2024-04-26",
+    "Status": "Active",
+    "ContractType": {
+      "Name": "Investi\u010Dn\u00E9 \u017Eivotn\u00E9 poistenie",
+      "InvolveVehicle": "N"
+    },
+    "Client": {
+      "Name": "Filip",
+      "Surname": "Barovsky",
+      "Nationality": "Slovak",
+      "PhoneNumber": "44452456",
+      "Address": {
+        "Country": "Slovakia",
+        "City": "Bereseg",
+        "PostalCode": "92001",
+        "Street": "Frobadurska",
+        "HouseNumber": "11"
+      }
+    },
+    "InsuranceCompany": {
+      "Name": "Allianz",
+      "PhoneNumber": "4002437",
+      "Address": {
+        "Country": "Czech Republic",
+        "City": "Brno",
+        "PostalCode": "60200",
+        "Street": "Cejl",
+        "HouseNumber": "22"
+      }
+    }
+  },
+  {
+    "SignDate": "2024-05-03",
+    "Status": "Active",
+    "ContractType": {
+      "Name": "PZP",
+      "InvolveVehicle": "Y"
+    },
+    "Client": {
+      "Name": "Vladislav",
+      "Surname": "Kincl",
+      "Nationality": "Czech",
+      "PhoneNumber": "142437",
+      "Address": {
+        "Country": "Czech Republic",
+        "City": "Ostrava",
+        "PostalCode": "70030",
+        "Street": "\u0160t\u00FArova",
+        "HouseNumber": "65/C"
+      }
+    },
+    "InsuranceCompany": {
+      "Name": "Uniqua",
+      "PhoneNumber": "9897435",
+      "Address": {
+        "Country": "Czech Republic",
+        "City": "Brno",
+        "PostalCode": "63900",
+        "Street": "Babakova",
+        "HouseNumber": "103"
+      }
+    },
+    "Vehicle": {
+      "Brand": "\u0160koda",
+      "Model": "Superb",
+      "YearOfManufacture": "2020",
+      "Price": "20000",
+      "EvidenceNumber": "2D9 8374"
+    }
+  },
+  {
+    "SignDate": "2024-05-01",
+    "Status": "Active",
+    "ContractType": {
+      "Name": "PZP",
+      "InvolveVehicle": "Y"
+    },
+    "Client": {
+      "Name": "Stanislav",
+      "Surname": "Prochazka",
+      "Nationality": "Slovak",
+      "PhoneNumber": "479226655",
+      "Address": {
+        "Country": "Slovakia",
+        "City": "Trnava",
+        "PostalCode": "91701",
+        "Street": "Kapitalska",
+        "HouseNumber": "9"
+      }
+    },
+    "InsuranceCompany": {
+      "Name": "Union",
+      "PhoneNumber": "77899402",
+      "Address": {
+        "Country": "Czech Republic",
+        "City": "Praha",
+        "PostalCode": "80090",
+        "Street": "V\u00E1clavsk\u00E1",
+        "HouseNumber": "44"
+      }
+    },
+    "Vehicle": {
+      "Brand": "Mazda",
+      "Model": "3",
+      "YearOfManufacture": "2014",
+      "Price": "15000",
+      "EvidenceNumber": "5C1 7409"
+    }
+  },
+  {
+    "SignDate": "2024-04-29",
+    "Status": "Active",
+    "ContractType": {
+      "Name": "Kapit\u00E1lov\u00E9 poistenie",
+      "InvolveVehicle": "N"
+    },
+    "Client": {
+      "Name": "\u0160imon",
+      "Surname": "Kibaks",
+      "Nationality": "Slovak",
+      "PhoneNumber": "54566",
+      "Address": {
+        "Country": "Slovakia",
+        "City": "Trnava",
+        "PostalCode": "91701",
+        "Street": "Holl\u00E9ho",
+        "HouseNumber": "19"
+      }
+    },
+    "InsuranceCompany": {
+      "Name": "Uniqua",
+      "PhoneNumber": "9897435",
+      "Address": {
+        "Country": "Czech Republic",
+        "City": "Brno",
+        "PostalCode": "63900",
+        "Street": "Babakova",
+        "HouseNumber": "103"
+      }
+    }
+  },
+  {
+    "SignDate": "2024-04-18",
+    "Status": "Active",
+    "ContractType": {
+      "Name": "KASKO",
+      "InvolveVehicle": "Y"
+    },
+    "Client": {
+      "Name": "Jaroslav",
+      "Surname": "Novotn\u00FD",
+      "Nationality": "Czech",
+      "PhoneNumber": "759994",
+      "Address": {
+        "Country": "Czech Republic",
+        "City": "Brno",
+        "PostalCode": "60204",
+        "Street": "\u010Cesk\u00E1",
+        "HouseNumber": "3"
+      }
+    },
+    "InsuranceCompany": {
+      "Name": "Generali",
+      "PhoneNumber": "5664778",
+      "Address": {
+        "Country": "Czech Republic",
+        "City": "Brno",
+        "PostalCode": "60202",
+        "Street": "Lipov\u00E1",
+        "HouseNumber": "75"
+      }
+    },
+    "Vehicle": {
+      "Brand": "Audi",
+      "Model": "A5",
+      "YearOfManufacture": "2016",
+      "Price": "25000",
+      "EvidenceNumber": "7A8 6521"
+    }
+  },
+  {
+    "SignDate": "2024-03-20",
+    "Status": "Active",
+    "ContractType": {
+      "Name": "KASKO",
+      "InvolveVehicle": "Y"
+    },
+    "Client": {
+      "Name": "Patrik",
+      "Surname": "Landovsky",
+      "Nationality": "Slovak",
+      "PhoneNumber": "778847",
+      "Address": {
+        "Country": "Slovakia",
+        "City": "Nitra",
+        "PostalCode": "94901",
+        "Street": "Mostn\u00E1",
+        "HouseNumber": "17"
+      }
+    },
+    "InsuranceCompany": {
+      "Name": "Union",
+      "PhoneNumber": "77899402",
+      "Address": {
+        "Country": "Czech Republic",
+        "City": "Praha",
+        "PostalCode": "80090",
+        "Street": "V\u00E1clavsk\u00E1",
+        "HouseNumber": "44"
+      }
+    },
+    "Vehicle": {
+      "Brand": "Audi",
+      "Model": "A7",
+      "YearOfManufacture": "2020",
+      "Price": "35000",
+      "EvidenceNumber": "3B6 4192"
+    }
+  }
+]

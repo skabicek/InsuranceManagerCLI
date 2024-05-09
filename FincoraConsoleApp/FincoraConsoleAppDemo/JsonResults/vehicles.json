@@ -1,0 +1,30 @@
+﻿[
+  {
+    "Brand": "Audi",
+    "Model": "A7",
+    "YearOfManufacture": "2020",
+    "Price": "35000",
+    "EvidenceNumber": "3B6 4192"
+  },
+  {
+    "Brand": "Mazda",
+    "Model": "3",
+    "YearOfManufacture": "2014",
+    "Price": "15000",
+    "EvidenceNumber": "5C1 7409"
+  },
+  {
+    "Brand": "Audi",
+    "Model": "A5",
+    "YearOfManufacture": "2016",
+    "Price": "25000",
+    "EvidenceNumber": "7A8 6521"
+  },
+  {
+    "Brand": "\u0160koda",
+    "Model": "Superb",
+    "YearOfManufacture": "2020",
+    "Price": "20000",
+    "EvidenceNumber": "2D9 8374"
+  }
+]

@@ -11,8 +11,6 @@ class Program
         Console.OutputEncoding = System.Text.Encoding.UTF8;
         try
         {
-            /*if (File.Exists("myapp.db")) 
-                File.Delete("myapp.db");*/
             bool seedFlag = !File.Exists("myapp.db");
 
             using (var context = new MyAppContext())

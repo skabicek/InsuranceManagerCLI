@@ -1,0 +1,46 @@
+﻿[
+  {
+    "Name": "Allianz",
+    "PhoneNumber": "4002437",
+    "Address": {
+      "Country": "Czech Republic",
+      "City": "Brno",
+      "PostalCode": "60200",
+      "Street": "Cejl",
+      "HouseNumber": "22"
+    }
+  },
+  {
+    "Name": "Generali",
+    "PhoneNumber": "5664778",
+    "Address": {
+      "Country": "Czech Republic",
+      "City": "Brno",
+      "PostalCode": "60202",
+      "Street": "Lipov\u00E1",
+      "HouseNumber": "75"
+    }
+  },
+  {
+    "Name": "Uniqua",
+    "PhoneNumber": "9897435",
+    "Address": {
+      "Country": "Czech Republic",
+      "City": "Brno",
+      "PostalCode": "63900",
+      "Street": "Babakova",
+      "HouseNumber": "103"
+    }
+  },
+  {
+    "Name": "Union",
+    "PhoneNumber": "77899402",
+    "Address": {
+      "Country": "Czech Republic",
+      "City": "Praha",
+      "PostalCode": "80090",
+      "Street": "V\u00E1clavsk\u00E1",
+      "HouseNumber": "44"
+    }
+  }
+]
